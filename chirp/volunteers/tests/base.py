@@ -2,7 +2,6 @@
 """base testing components"""
 
 from django.test import TestCase
-from chirp.volunteers.management.commands.initgroups import initgroups
 
 def eq_(value, expected_value):
     assert value==expected_value, (
@@ -14,7 +13,6 @@ class CoordinatorLoginTest(TestCase):
     
     def setUp(self):
         super(CoordinatorLoginTest, self).setUp()
-        initgroups(quiet=True)
         assert self.client.login(username='coordtest', password='test') # True if can login
     
     def tearDown(self):
@@ -25,7 +23,6 @@ class MeetingCoordLoginTest(TestCase):
     
     def setUp(self):
         super(MeetingCoordLoginTest, self).setUp()
-        initgroups(quiet=True)
         assert self.client.login(username='meetingcoord', password='test') # True if can login
     
     def tearDown(self):
@@ -36,7 +33,6 @@ class VolunteerLoginTest(TestCase):
     
     def setUp(self):
         super(VolunteerLoginTest, self).setUp()
-        initgroups(quiet=True)
         assert self.client.login(username='volunteertest', password='test') # True if can login
     
     def tearDown(self):
