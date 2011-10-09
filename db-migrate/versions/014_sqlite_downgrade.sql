@@ -1,0 +1,1 @@
+-- too lazy to make rollback for dropping columns :( (kumar)

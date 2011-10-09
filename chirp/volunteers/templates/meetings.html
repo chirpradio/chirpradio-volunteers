@@ -1,0 +1,55 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_modify adminmedia %}
+
+{% block extrahead %}
+
+ 	<link href="/local_site_media/js/jquery-ui-themeroller/theme/ui.all.css" 
+ 	        media="screen" rel="stylesheet" type="text/css" />
+ 	<link href="/local_site_media/js/jquery-autocomplete/jquery.autocomplete.css" 
+ 	        media="screen" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" 
+            src="/local_site_media/js/jquery/jquery-1.3.1.js"></script>
+    <script type="text/javascript" 
+            src="/local_site_media/js/jquery-ui-themeroller/jquery.ui.all.js"></script>
+    <script type="text/javascript" 
+            src="/local_site_media/js/jquery-autocomplete/jquery.autocomplete.js"></script>
+    <script type="text/javascript" 
+            src="/local_site_media/js/chirp/chirp.js"></script>
+    <script type="text/javascript" 
+            src="/local_site_media/js/chirp/meetings.js"></script>
+    
+    {% for js_script in extra_js_scripts %}
+    <script type="text/javascript" 
+            src="{{ js_script }}"></script>
+    {% endfor %}
+	
+{% endblock %}
+
+{% block extrastyle %}
+
+{% for stylesheet in extra_stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ stylesheet }}" />
+{% endfor %}
+
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+     <a href="/">Home</a> &rsaquo;
+     <a href="/chirp/meetings">Meeting Attendance Tracker</a>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<p>Meeting date: <input id="meeting_date" type="text" /></p>
+<p><span id="attendee_count"></span><a id="attendee_list_display" href="#"></a></p>
+<div id="attendee_list"></div>
+<div id="attendee_entry">
+    Add attendee: 
+    <input  type="text" value="" id="attendee_name" 
+            autocomplete="off" class="ac_input" style=""/>
+</div>
+<p>(Add <a href="/auth/user/add/">new volunteer</a> if not in the list)</p>
+    
+{% endblock %}

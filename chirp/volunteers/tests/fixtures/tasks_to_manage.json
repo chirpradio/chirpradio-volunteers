@@ -1,0 +1,212 @@
+[
+ {
+     "pk": 16,
+     "model": "volunteers.committee",
+     "fields": {
+         "established": "2009-02-18 21:51:45",
+         "name": "Merchandise/Design - Tony Breed/Jenny Lizak",
+         "modified": "2009-12-04 11:28:18"
+     }
+ },
+ {
+   "pk": 1, 
+   "model": "volunteers.event", 
+   "fields": {
+     "start_date": "2009-04-18", 
+     "duration_days": 2, 
+     "name": "CHIRP Record Fair", 
+     "location": "Plumbers Union",
+     "tasks_can_be_claimed": 1
+   }
+ }, 
+ {
+  "pk": 8, 
+  "model": "auth.user", 
+  "fields": {
+   "username": "volunteer_for_manage_tasks_tests", 
+   "first_name": "Volunteer", 
+   "last_name": "For Manage Tasks Tests", 
+   "is_active": true, 
+   "is_superuser": true, 
+   "is_staff": true, 
+   "last_login": "2008-10-01 09:06:27", 
+   "groups": [2], 
+   "user_permissions": [], 
+   "password": "sha1$db160$d6e8d6a1854b77fb6e7905d1d1d86b8436644490", 
+   "email": "volunteer_for_manage_tasks_tests@chirpradio.org", 
+   "date_joined": "2008-10-01 09:01:48"
+  }
+ },
+ {
+  "pk": 9, 
+  "model": "auth.user", 
+  "fields": {
+   "username": "volunteer_for_chirp_recordfair", 
+   "first_name": "Volunteer", 
+   "last_name": "For Manage Tasks Tests", 
+   "is_active": true, 
+   "is_superuser": true, 
+   "is_staff": true, 
+   "last_login": "2008-10-01 09:06:27", 
+   "groups": [2], 
+   "user_permissions": [], 
+   "password": "sha1$db160$d6e8d6a1854b77fb6e7905d1d1d86b8436644490", 
+   "email": "volunteer_for_manage_tasks_tests@chirpradio.org", 
+   "date_joined": "2008-10-01 09:01:48"
+  }
+ },
+ {
+  "pk": 2, 
+  "model": "volunteers.volunteer", 
+  "fields": {
+   "can_dj_events": true, 
+   "city": "Chicago", 
+   "committees": [
+    1
+   ], 
+   "day_job": "volunteer_for_manage_tasks_tests", 
+   "established": "2008-10-04 18:41:28", 
+   "skills": "", 
+   "knows_computers": true, 
+   "modified": "2008-10-04 18:54:33", 
+   "has_equipment": true, 
+   "state": "IL", 
+   "user": 8, 
+   "has_a_car": true, 
+   "can_fix_stuff": false, 
+   "address_line_2": "", 
+   "availability": "evenings, weekends", 
+   "resources": "", 
+   "address_line_1": "x"
+  }
+ }, 
+ {
+  "pk": 3, 
+  "model": "volunteers.volunteer", 
+  "fields": {
+   "can_dj_events": true, 
+   "city": "Chicago", 
+   "committees": [
+    1
+   ], 
+   "day_job": "volunteer_for_chirp_recordfair", 
+   "established": "2008-10-04 18:41:28", 
+   "skills": "", 
+   "knows_computers": true, 
+   "modified": "2008-10-04 18:54:33", 
+   "has_equipment": true, 
+   "state": "IL", 
+   "user": 8, 
+   "has_a_car": true, 
+   "can_fix_stuff": false, 
+   "address_line_2": "", 
+   "availability": "evenings, weekends", 
+   "resources": "", 
+   "address_line_1": "x"
+  }
+ }, 
+ {
+   "pk": 1, 
+   "model": "volunteers.tasktype", 
+   "fields": {
+     "short_description": "Tabling", 
+     "established": "2008-10-18 21:36:10", 
+     "description": "", 
+     "modified": "2008-10-18 21:36:10"
+   }
+ },
+ {
+   "pk": 2, 
+   "model": "volunteers.tasktype", 
+   "fields": {
+     "short_description": "Event Load In", 
+     "established": "2008-10-18 21:36:10", 
+     "description": "", 
+     "modified": "2008-10-18 21:36:10"
+   }
+ },
+ {
+   "pk": 2, 
+   "model": "volunteers.task", 
+   "fields": {
+     "for_event": null, 
+     "for_committee": 16, 
+     "task_type": 1, 
+     "description": "sell merch", 
+     "established": "2009-03-21 17:39:40", 
+     "start_time": null, 
+     "modified": "2009-03-21 17:41:42", 
+     "duration_minutes": null, 
+     "num_volunteers_needed": null,
+     "potential_points": 3
+   }
+ }, 
+ {
+   "pk": 3, 
+   "model": "volunteers.task", 
+   "fields": {
+     "for_event": null, 
+     "for_committee": 16, 
+     "task_type": 1, 
+     "description": "sell swag", 
+     "established": "2009-03-21 17:39:54", 
+     "start_time": null, 
+     "modified": "2009-03-21 17:42:11", 
+     "duration_minutes": null, 
+     "num_volunteers_needed": null,
+     "potential_points": 3
+   }
+ },
+ {
+   "pk": 4, 
+   "model": "volunteers.task", 
+   "fields": {
+     "for_event": 1, 
+     "for_committee": 16, 
+     "task_type": 2, 
+     "description": "load in", 
+     "established": "2009-03-21 17:39:40", 
+     "start_time": null, 
+     "modified": "2009-03-21 17:41:42", 
+     "duration_minutes": null, 
+     "num_volunteers_needed": null,
+     "potential_points": 3
+   }
+ }, 
+ {
+   "pk": 1, 
+   "model": "volunteers.taskassignment", 
+   "fields": {
+     "status": 1, 
+     "established": "2009-04-08 11:02:41", 
+     "task": 2, 
+     "modified": "2009-04-08 11:02:41", 
+     "points": 1, 
+     "volunteer": 2
+   }
+ }, 
+ {
+   "pk": 2, 
+   "model": "volunteers.taskassignment", 
+   "fields": {
+     "status": 1, 
+     "established": "2009-04-08 11:08:33", 
+     "task": 3, 
+     "modified": "2009-04-08 11:08:33", 
+     "points": 1, 
+     "volunteer": 2
+   }
+ },
+ {
+   "pk": 3, 
+   "model": "volunteers.taskassignment", 
+   "fields": {
+     "status": 1, 
+     "established": "2009-04-08 11:08:33", 
+     "task": 4, 
+     "modified": "2009-04-08 11:08:33", 
+     "points": 1, 
+     "volunteer": 3
+   }
+ }
+]

@@ -1,0 +1,15 @@
+
+#manage_tasks form label {
+    width: 200px;
+    display: block;
+    float: left;
+}
+
+#manage_tasks form .form_row {
+    clear: both;
+}
+
+#manage_tasks #save_changes_row {
+    margin-top: 1em;
+    text-align: left;
+}

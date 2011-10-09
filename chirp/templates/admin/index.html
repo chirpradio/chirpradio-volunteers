@@ -1,0 +1,148 @@
+{% extends "admin/base_site.html" %}
+{% load i18n volunteers_extras %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% load adminmedia %}{% admin_media_prefix %}css/dashboard.css" />{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+<div id="content-main">
+
+{% if app_list %}
+    {% for app in app_list %}
+        <div class="module">
+        <table summary="{% blocktrans with app.name as name %}Models available in the {{ name }} application.{% endblocktrans %}">
+        <caption><a href="{{ app.app_url }}" class="section">{% blocktrans with app.name as name %}{{ name }}{% endblocktrans %}</a></caption>
+        {% for model in app.models %}
+            <tr>
+            {% if model.perms.change %}
+                <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+            {% else %}
+                <th scope="row">{{ model.name }}</th>
+            {% endif %}
+
+            {% if model.perms.add %}
+                <td><a href="{{ model.admin_url }}add/" class="addlink">{% trans 'Add' %}</a></td>
+            {% else %}
+                <td>&nbsp;</td>
+            {% endif %}
+
+            {% if model.perms.change %}
+                <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></td>
+            {% else %}
+                <td>&nbsp;</td>
+            {% endif %}
+            </tr>
+        {% endfor %}
+        </table>
+        </div>
+    {% endfor %}
+{% else %}
+    <!--<p>{% trans "You don't have permission to edit anything." %}</p>-->
+{% endif %}
+
+{% ifusergroup "Meeting Coordinator" %}
+<div class="module">
+<table>
+<caption><a href="#" class="section">Meetings</a></caption>
+<tr>
+    <th><a href="/chirp/meetings/">Meeting attendance tracker</a></th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+</table>
+</div>
+{% endifusergroup %}
+
+{% ifusergroup "Volunteer Coordinator" %}
+<div class="module">
+<table>
+<caption><a href="#" class="section">Task Management</a></caption>
+<tr>
+    <th><a href="/chirp/tasks/manage/">Manage volunteering tasks</a></th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+<tr>
+    <th><form method="post" action="/chirp/tasks/clone-event">
+        <div>Clone an existing event 
+        {{ clone_event_form.existing_event }}
+        </div>
+        <div>
+        New start date: {{ clone_event_form.new_start_date }}
+        </div>
+        <div>
+        New name: {{ clone_event_form.new_name }}
+        </div>
+        <input type="submit" value="Go" />
+        </form></th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+</table>
+</div>
+<div class="module">
+<table>
+<caption><a href="#" class="section">Downloads</a></caption>
+<tr>
+    <th><a href="/chirp/chirp_all_volunteers.csv">CSV of all volunteers</a></th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+<tr>
+    <th><a href="/chirp/chirp_volunteers_unpaid_dues.csv">CSV of volunteers with <em>unpaid</em> dues in {% current_time "%Y" %}</a></th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+<tr>
+    <th><form method="get" action="/chirp/chirp_volunteer_activity.csv">
+        Volunteer activity since 
+        {{ volunteer_activity_form.as_of_date }} :
+        <input type="submit" value="Download CSV" />
+        </form></th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+</table>
+</div>
+{% endifusergroup %}
+
+{% ifusergroup "Volunteer" %}
+<div class="module">
+<table>
+<caption><a href="#" class="section">Tasks</a></caption>
+<tr>
+    <th><a href="/chirp/tasks/claim/">Volunteer For A Task</a></th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+</table>
+</div>
+{% endifusergroup %}
+    
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<div id="content-related">
+    <div class="module" id="recent-actions-module">
+        <h2>{% trans 'Recent Actions' %}</h2>
+        <h3>{% trans 'My Actions' %}</h3>
+            {% load log %}
+            {% get_admin_log 10 as admin_log for_user user %}
+            {% if not admin_log %}
+            <p>{% trans 'None available' %}</p>
+            {% else %}
+            <ul class="actionlist">
+            {% for entry in admin_log %}
+            <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">{% if not entry.is_deletion %}<a href="{{ entry.get_admin_url }}">{% endif %}{{ entry.object_repr }}{% if not entry.is_deletion %}</a>{% endif %}<br /><span class="mini quiet">{% filter capfirst %}{% trans entry.content_type.name %}{% endfilter %}</span></li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+    </div>
+</div>
+{% endblock %}

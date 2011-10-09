@@ -1,0 +1,1 @@
+-- too lazy to create rollback for dropping columns.  See README.

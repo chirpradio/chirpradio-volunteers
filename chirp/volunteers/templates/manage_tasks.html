@@ -1,0 +1,112 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_modify adminmedia %}
+
+{% block extrahead %}
+
+    <script type="text/javascript" 
+            src="/local_site_media/js/jquery/jquery-1.3.1.js"></script>
+    <script type="text/javascript" src="/local_site_media/js/chirp/chirp.js"></script>
+    <script type="text/javascript" src="/local_site_media/js/chirp/manage_tasks.js"></script>
+    
+    {% for js_script in extra_js_scripts %}
+    <script type="text/javascript" src="{{ js_script }}"></script>
+    {% endfor %}
+    
+    <link rel="stylesheet" type="text/css" href="/local_site_media/css/manage_tasks.css" />
+	
+{% endblock %}
+
+{% block extrastyle %}
+
+{% for stylesheet in extra_stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ stylesheet }}" />
+{% endfor %}
+
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+     <a href="/">Home</a> &rsaquo;
+     <a href="/chirp/tasks/manage/">Manage tasks</a>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div id="manage_tasks">
+<form action="" method="get">
+{% if form.volunteer.errors %}{{ form.volunteer.errors }}{% endif %}
+<p class="form_row">
+    <label for="id_volunteer">{% trans 'Manage tasks by volunteer:' %}</label>{{ form.volunteer }}
+</p>
+<p class="form_row">
+    <label for="id_event">{% trans 'Manage tasks by event:' %}</label>{{ form.event }}
+</p>
+{% if event_edit_href %}
+  <p class="form_row">
+      <label>&nbsp;</label><a href="{{ event_edit_href }}">{% trans 'Edit this event' %}</a>
+  </p>
+{% endif %}
+<p class="form_row">
+    <label for="id_show_completed">{% trans 'Show completed tasks:' %}</label>{{ form.show_completed }}
+</p>
+<p class="form_row">
+    <label for="id_show_canceled">{% trans 'Show canceled tasks:' %}</label>{{ form.show_canceled }}
+</p>
+<p class="form_row">
+    <label for="id_show_unassigned">{% trans 'Show unassigned tasks:' %}</label>{{ form.show_unassigned }}
+</p>
+<p class="form_row">
+    <label>&nbsp;</label><input type="submit" id="show-tasks-submit" value="Show tasks" />
+</p>
+</form>
+{% if task_assignments %}
+<form action="/chirp/tasks/manage/save_changes" method="post">
+    <input type="hidden" name="volunteer" value="{{ volunteer_id }}" />
+    <input type="hidden" name="event" value="{{ event_id }}" />
+    <input type="hidden" name="show_completed" value="{{ show_completed }}" />
+    <input type="hidden" name="show_canceled" value="{{ show_canceled }}" />
+<p class="form_row">
+    <label for="id_volunteer">{% trans 'Set all tasks to:' %}</label>{{ form.set_status_for_all }}
+</p>
+<table>
+<tr>
+    <th>Status</th>
+    <th>Task</th>
+    <th>Start time</th>
+    <th>Volunteer</th>
+    <th>Points</th>
+    <th>Event</th>
+    <th>Action</th>
+</tr>
+{% for t in task_assignments %}
+<tr>
+    <td>{{ t.status_select }}</td>
+    <td>{{ t.task.task_type.short_description }}</td>
+    <td>{{ t.task.start_time|date:"D M jS g:i a" }}</td>
+    <td>{{ t.assignment.volunteer.user.first_name }}
+        {{ t.assignment.volunteer.user.last_name }}</td>
+    <td>{{ t.assignment.points }}</td>
+    <td>{{ t.assignment.task.for_event.name }}</td>
+    <td>
+        {% if t.edit_assignment_href %}
+          <a href="{{ t.edit_assignment_href }}">Edit assignment</a> |
+        {% endif %}
+        <a href="{{ t.edit_task_href }}">Edit task</a></td>
+</tr>
+{% endfor %}
+</table>
+<div id="save_changes_row">
+    <input type="submit" name="action" value="Save changes" />
+</div>
+{% else %}
+
+{% if tasks_requested %}
+<p>There are no task assignments matching the above criteria.</p>
+{% endif %}
+
+{% endif %}
+</form>
+</div>
+    
+{% endblock %}

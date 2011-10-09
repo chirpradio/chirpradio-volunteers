@@ -1,0 +1,107 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_modify adminmedia volunteers_extras %}
+
+{% block extrahead %}
+
+ 	<link href="/local_site_media/css/claim_tasks.css" 
+ 	        media="screen" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" 
+            src="/local_site_media/js/jquery/jquery-1.3.1.js"></script>
+    <script type="text/javascript" 
+            src="/local_site_media/js/chirp/chirp.js"></script>
+    <script type="text/javascript" 
+            src="/local_site_media/js/chirp/claim_tasks.js"></script>
+    
+    {% for js_script in extra_js_scripts %}
+    <script type="text/javascript" 
+            src="{{ js_script }}"></script>
+    {% endfor %}
+	
+{% endblock %}
+
+{% block extrastyle %}
+
+{% for stylesheet in extra_stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ stylesheet }}" />
+{% endfor %}
+
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+     <a href="/">Home</a> &rsaquo;
+     <a href="/chirp/claim_tasks">Claim A Task</a>
+</div>
+{% endblock %}
+
+{% block content %}
+
+{% for event in events %}
+<h2>{{ event.name }}</h2>
+    {% if event.tasks %}
+        
+    <table class="claim_tasks">
+    <tr>
+        <th>Day</th>
+        <th>Task</th>
+        <th>Time Slot</th>
+        <th colspan="5"></th>
+    </tr>
+    {% for task in event.tasks %}
+    <tr>
+        <td>{{ task.start_time|date:"D M jS" }}</td>
+        <td>{{ task.task_type.short_description }}
+            
+            {% if task.description %}
+            : {{ task.description }}
+            {% else %}
+                {% if task.task_type.description %}
+                : {{ task.task_type.description }}
+                {% endif %}
+            {% endif %}
+            
+            {% if task.task_type.important_note %}
+            <br /><b>NOTE:</b> {{ task.task_type.important_note }}
+            {% endif %}   
+            
+            </td>
+        <td>{{ task.start_time|date:"g:i a" }} - 
+            {{ task.end_time|date:"g:i a" }}</td>
+        <td>{{ task|render_claim_task:0|safe }}</td>
+        <td>{{ task|render_claim_task:1|safe }}</td>
+        <td>{{ task|render_claim_task:2|safe }}</td>
+        <td>{{ task|render_claim_task:3|safe }}</td>
+        <td>{{ task|render_claim_task:4|safe }}</td>
+    </tr>
+    
+    {% ifgreaterthan task.num_volunteers_needed 5 %}
+    <tr>
+        <td colspan="3"></td>
+        <td>{{ task|render_claim_task:5|safe }}</td>
+        <td>{{ task|render_claim_task:6|safe }}</td>
+        <td>{{ task|render_claim_task:7|safe }}</td>
+        <td>{{ task|render_claim_task:8|safe }}</td>
+        <td>{{ task|render_claim_task:9|safe }}</td>
+    </tr>
+    {% endifgreaterthan %}
+    
+    {% ifgreaterthan task.num_volunteers_needed 10 %}
+    <tr>
+        <td colspan="3"></td>
+        <td>{{ task|render_claim_task:10|safe }}</td>
+        <td>{{ task|render_claim_task:11|safe }}</td>
+        <td>{{ task|render_claim_task:12|safe }}</td>
+        <td>{{ task|render_claim_task:13|safe }}</td>
+        <td>{{ task|render_claim_task:14|safe }}</td>
+    </tr>
+    {% endifgreaterthan %}
+    {% endfor %}
+    </table>
+    
+    {% else %}
+    <p>Tasks for this event are not yet ready for claiming.  Check back soon.</p>
+    {% endif %}
+    
+{% endfor %}
+    
+{% endblock %}

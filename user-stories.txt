@@ -1,0 +1,47 @@
+
+NOTE: This file exists for historic purposes; new stories should be added to the project tracker: http://code.google.com/p/chirpradio/
+
+The stories:
+
+(stories marked with #1 are must-haves; stories marked with #2 are nice-to-haves.)
+
+(DONE) 1. As the Coordinator I want to enter in info on a Chirp committe:
+- Name of committee
+
+(DONE) 1. As the Coordinator I want to enter in basic info on a Volunteer:
+- Name/Address/Email/Phone
+- Special Skills? i.e. Computer knowledge/Has a car/Can fix
+things/DJs(has rig/has records?)/etc
+- "Day Job"
+- General availability: nights, evening, weekends or never on those?
+
+(DONE) 1. As the Coordinator I want to add / delete what Chirp committees a
+Volunteer is currently active in
+
+(DONE) 1. As the Coordinator I want to enter in a task:
+- Task description
+- Date, Time
+- Assigned? Completed? Canceled? Changed
+- Point Score (is this a number?)
+- Approved by Coordinator
+
+(DONE) 1. As the Coordinator I want to assign a task to a volunteer
+
+2. As the Volunteer I want to enter in a task I have done or am about to do:
+- Task description
+- Date, Time
+- Assigned? Completed? Canceled? Changed
+
+2. As a Volunteer I want to be emailed when I have been assigned a task
+
+(DONE) 2. As the Coordinator I want to approve a task that a Volunteer has entered.
+
+2. As the Coordinator I want to be emailed when a Volunteer has completed a task so I can login to approve it and add a point score.
+
+2. As the Volunteer I want to see how many "points" I have completed and how many I have due.
+
+2. As the Coordinator I want to get an email list of all Volunteers.
+
+2. As the Coordinator I want to get an email list for Volunteers that have a car, can DJ, can fix things, or have equipment.
+
+2. As a Volunteer I want to be able to claim tasks that have not been assigned yet.

@@ -1,0 +1,6 @@
+This is a database migration repository.
+
+More information at
+http://code.google.com/p/sqlalchemy-migrate/
+
+For use with the CHIRP volunteer application see README.txt in the chirp directory

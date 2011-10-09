@@ -1,0 +1,20 @@
+import os, sys
+here_dir = os.path.dirname(__file__)
+# for settings:
+sys.path.append(os.path.join(here_dir))
+# for chirp:
+sys.path.append(os.path.join(here_dir, 'app'))
+# for django, etc :
+sys.path.append(os.path.join(here_dir, 'app', 'site-packages'))
+os.environ['DJANGO_SETTINGS_MODULE'] = 'chirp_settings_live'
+import django.core.handlers.wsgi
+
+# http://mail.google.com/support/bin/answer.py?hl=en&answer=13287
+# also note that SetEnv doesn't work because it only affects the 
+# wsgi environ not the process environ
+os.environ['CHIRP_EMAIL_HOST'] = 'smtp.somewhere.com'
+os.environ['CHIRP_EMAIL_HOST_USER'] = 'email@place.com'
+os.environ['CHIRP_EMAIL_HOST_PASSWORD'] = 'ppp'
+os.environ['CHIRP_EMAIL_PORT'] = '465'
+
+application = django.core.handlers.wsgi.WSGIHandler()
