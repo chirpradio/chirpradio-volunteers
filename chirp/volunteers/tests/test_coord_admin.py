@@ -46,9 +46,8 @@ class TestVolunteerMgmt(CoordinatorLoginTest):
             'user': user,
             'committees': committees,
         })
-        eq_(resp.status_code, 302)
-        assert resp['Location'].endswith("/volunteers/volunteer/"), (
-                                    "unexpected redirect: %s" % resp['Location'])
+        # print resp
+        self.assertRedirects(resp, '/volunteers/volunteer/')
 
         v = Volunteer.objects.all()
         eq_(v.count(), vol_count + 1)
@@ -108,9 +107,7 @@ class TestTaskMgmt(CoordinatorLoginTest):
             'status': task_status_id
         })
         # print resp.content
-        eq_(resp.status_code, 302)
-        assert resp['Location'].endswith("/volunteers/taskassignment/"), (
-                                    "unexpected redirect: %s" % resp['Location'])
+        self.assertRedirects(resp, '/volunteers/taskassignment/')
 
         task_asn = TaskAssignment.objects.all()[0]
         eq_(task_asn.volunteer.id, vol_id)
