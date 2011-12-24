@@ -25,7 +25,7 @@ Developers
 Getting Started
 ---------------
 
-To get started, first install `Python`_ 2.5.  We currently don't support
+To get started, first install `Python`_ 2.7.  We currently don't support
 other versions of Python.  Check out the code from github::
 
   git clone git://github.com/chirpradio/chirpradio-volunteers.git
@@ -133,7 +133,7 @@ Sending Email
 You can develop local code that might send email by running a debugging SMTP
 server. Start this up in a shell ::
     
-    python2.5 -m smtpd -n -c DebuggingServer
+    python2.7 -m smtpd -n -c DebuggingServer
 
 then start the Django development server with a settings file that changes the
 email port ::
