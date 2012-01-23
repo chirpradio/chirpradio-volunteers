@@ -422,7 +422,7 @@ def get_csv_of_volunteer_activity(request):
     fields = [d[0] for d in c.description]
     for row in c:
         r = dict(zip(fields, row))
-        user_points["%s %s" % (r['u.first_name'], r['u.last_name'])] += Decimal(str(r['points']))
+        user_points["%s %s" % (r['first_name'], r['last_name'])] += Decimal(str(r['points']))
         
     c.execute("""
     select 
