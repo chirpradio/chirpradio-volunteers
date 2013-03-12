@@ -8,4 +8,4 @@ Task     : {{ task|safe }}
 
 Thanks!
 
-You are committed to this task.  IF YOU HAVE AN EMERGENCY that prevents you from fulfilling your commitment, please make every effort to get a sub.  You also need to call Nicole Oppenheim 773-677-7038 *and* email volunteers@chirpradio.org immediately with your sub's name and / or inability to find a sub.
+You are committed to this task.  IF YOU HAVE AN EMERGENCY that prevents you from fulfilling your commitment, please make every effort to get a sub. Email volunteers@chirpradio.org immediately with your sub's name and / or inability to find a sub.
